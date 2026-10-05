@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js" defer></script>
+    <title>Dynamic Counter</title>
+  </head>
+  <body>
+    <div class="counter-contain">
+      <!-- Step configuration input -->
+      <div class="step-control">
+        <label for="step-input">Step size:</label>
+        <input type="number" id="step-input" value="1" min="1" />
+      </div>
+
+      <!-- Main counter interface -->
+      <div class="display-control">
+        <button id="btn-dec" aria-label="Decrease count">-</button>
+        <span id="counter-value">0</span>
+        <button id="btn-inc" aria-label="Increase count">+</button>
+      </div>
+
+      <!-- Reset option -->
+      <button id="btn-reset">Reset</button>
+    </div>
+  </body>
+</html>
