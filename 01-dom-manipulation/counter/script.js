@@ -6,9 +6,10 @@ const stepInput = document.getElementById("step-input");
 const counterValue = document.getElementById("counter-value");
 
 // Application State
-let count = 0;
 const MIN_LIMIT = 0;
 const MAX_LIMIT = 10;
+
+let count = parseInt(localStorage.getItem("counter_value"), 10) || MIN_LIMIT;
 
 // Helper Functions & UI Sync
 function getStepValue() {
@@ -17,6 +18,8 @@ function getStepValue() {
 
 function updateUI() {
   counterValue.textContent = count;
+
+  localStorage.setItem("counter_value", count);
 
   const currentStep = getStepValue();
   btnDec.disabled = count - currentStep < MIN_LIMIT;
@@ -45,7 +48,7 @@ btnDec.addEventListener("click", () => {
 });
 
 btnReset.addEventListener("click", () => {
-  count = 0;
+  count = MIN_LIMIT;
   updateUI();
 });
 
