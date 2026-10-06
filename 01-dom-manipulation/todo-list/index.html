@@ -10,12 +10,18 @@
         text-decoration: line-through;
         color: gray;
       }
+
+      .counter-status {
+        margin-top: 10px;
+        font-size: 0.9rem;
+        color: #555;
+      }
     </style>
   </head>
   <body>
     <div class="todo-container">
-        <h2>Minhas Tarefas</h2>
-        
+      <h2>Minhas Tarefas</h2>
+
       <form id="todo-form">
         <input
           type="text"
@@ -25,6 +31,8 @@
         />
         <button type="submit">Adicionar</button>
       </form>
+
+      <div class="counter-status" id="counter-status">Completed: 0 / 0</div>
 
       <ul id="todo-list"></ul>
     </div>
