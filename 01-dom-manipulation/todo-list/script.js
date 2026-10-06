@@ -14,7 +14,7 @@ function createTaskElement(taskText) {
 
   // Events
   span.addEventListener("click", () => {
-    span.classList("completed");
+    span.classList.toggle("completed");
   });
 
   // 1. Cria o botão de deletar tarefa
