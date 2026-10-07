@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>External User Profiles</title>
+    <script src="script.js" defer></script>
+    <style>
+      .user-card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 6px;
+      }
+
+      #error-message {
+        color: red;
+        font-weight: bold;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <h2>Diretório da Equipe</h2>
+
+      <div id="loading-indicator">Carregando usuários, por favor espere...</div>
+
+      <div id="error-message"></div>
+
+      <div id="users-grid"></div>
+    </div>
+  </body>
+</html>
