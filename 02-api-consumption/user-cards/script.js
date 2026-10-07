@@ -2,6 +2,8 @@
 const usersGrid = document.getElementById("users-grid");
 const loadingIndicator = document.getElementById("loading-indicator");
 const errorMessage = document.getElementById("error-message");
+const errorText = document.getElementById("error-text");
+const btnRetry = document.getElementById("btn-retry");
 
 const API_URL = "https://jsonplaceholder.typicode.com/users";
 
@@ -25,10 +27,13 @@ function renderUsers(users) {
   });
 }
 
-// Main Asynchronous Logic
+// Core Async Logic with Performance & Resilience Enhancements
 async function fetchUsers() {
+  // Cria o AbortController para timeout de rede
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 3000); // Limite de 3s
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, { signal: controller.signal });
 
     // Validar manualmente usando a propriedade response.ok
     if (!response.ok) {
@@ -37,14 +42,32 @@ async function fetchUsers() {
 
     const usersData = await response.json();
     renderUsers(usersData);
+
+    // Slice de dados para limitar em apenas 3 resultados
+    const limitedUsers = usersData.slice(0, 3);
+    renderUsers(limitedUsers);
   } catch (error) {
-    // Trata e renderiza a mensagem de erro na tela
-    errorMessage.textContent = `Falha ao carregar o diretório de usuários: ${error.message}`;
+    if (error.name === "AbortError") {
+      errorText.textContent =
+        "A solicitação expirou. O servidor demorou muito para responder.";
+    } else {
+      // Trata e renderiza a mensagem de erro na tela
+      errorText.textContent = `Falha ao carregar o diretório de usuários: ${error.message}`;
+    }
     errorMessage.style.display = "block";
+    usersGrid.innerHTML = ""; // Limpa resultados antwriores caso haja falha
   } finally {
+    clearTimeout(timeoutId); // Limpa o temporizador da memória
     loadingIndicator.style.display = "none";
   }
 }
+
+// Mecanismo de Retry
+btnRetry.addEventListener("click", () => {
+  errorMessage.style.display = "none";
+  loadingIndicator.style.display = "block";
+  fetchUsers();
+});
 
 // Inicia a solicitação inicial à API
 fetchUsers();

@@ -17,6 +17,12 @@
         color: red;
         font-weight: bold;
         display: none;
+        margin: 15px 0;
+      }
+
+      #btn-retry {
+        margin-left: 10px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -26,7 +32,10 @@
 
       <div id="loading-indicator">Carregando usuários, por favor espere...</div>
 
-      <div id="error-message"></div>
+      <div id="error-message">
+        <span id="error-text"></span>
+        <button id="btn-retry">Tentar Novamente</button>
+      </div>
 
       <div id="users-grid"></div>
     </div>
